@@ -1,4 +1,4 @@
-﻿namespace Ventas.Backend.Models
+﻿namespace Ventas.API.Models
 {
     using Ventas.Domain.Models;
 

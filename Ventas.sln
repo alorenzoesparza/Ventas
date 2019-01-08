@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ventas.iOS", "Ventas\Ventas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ventas.UWP", "Ventas\Ventas.UWP\Ventas.UWP.csproj", "{6FADBEE9-3D26-4875-BC52-E6A22BC6EEA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ventas", "Ventas\Ventas\Ventas.csproj", "{884C9C8A-A28B-47C7-9AD7-B61A06232458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ventas", "Ventas\Ventas\Ventas.csproj", "{884C9C8A-A28B-47C7-9AD7-B61A06232458}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ventas.Backend", "Ventas.Backend\Ventas.Backend.csproj", "{71A043E3-3C3D-4FDD-9642-F0EB8B995ED3}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ventas.Domain", "Ventas.Domain\Ventas.Domain.csproj", "{E9F95706-D21D-4DC4-9A83-E291A3A129EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ventas.Common", "Ventas.Common\Ventas.Common.csproj", "{EBF413A6-7286-49EC-B5CF-8513BB8D30B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D307266-DF2C-44F4-85F6-1AB65B9A5399}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
