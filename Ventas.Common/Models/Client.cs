@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Client
     {
@@ -30,5 +31,14 @@
         //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         //[Display(Name = "Fecha de Alta")]
         //public DateTime? FechaAlta { get; set; }
+        [NotMapped]
+        [Display(Name = "Nombre")]
+        public string NombreCompleto
+        {
+            get
+            {
+                return $"{Apellidos}, {Nombre}";
+            }
+        }
     }
 }

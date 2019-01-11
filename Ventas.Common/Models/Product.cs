@@ -25,5 +25,10 @@
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de Alta")]
         public DateTime? FechaAlta { get; set; }
+
+        public override string ToString()
+        {
+            return this.Descripcion;
+        }
     }
 }
