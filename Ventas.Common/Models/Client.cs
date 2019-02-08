@@ -1,6 +1,8 @@
 ﻿namespace Ventas.Common.Models
 {
+    using Newtonsoft.Json;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,9 +21,13 @@
         [Display(Name = "Apellidos")]
         public string Apellidos { get; set; }
 
-        ////[Required(ErrorMessage = "El campo {0} es obligatorio")]
-        //[DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
-        //public decimal Precio { get; set; }
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        [Display(Name = "Periodicidad")]
+        public int PeriodicityId { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        [Display(Name = "Zona")]
+        public int ZoneId { get; set; }
 
         [Display(Name = "Está activo")]
         public bool EsActivo { get; set; }
@@ -31,6 +37,7 @@
         //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         //[Display(Name = "Fecha de Alta")]
         //public DateTime? FechaAlta { get; set; }
+
         [NotMapped]
         [Display(Name = "Nombre")]
         public string NombreCompleto
@@ -40,5 +47,18 @@
                 return $"{Apellidos}, {Nombre}";
             }
         }
+        // **************************************************************************************
+        // Definir relación entre clientes y rutas
+        // Una ruta puede tener varios clientes
+        //[JsonIgnore]
+        //public virtual RouteClient Rutas { get; set; }
+
+        // Relación entre clientes y rutas
+        // Un Cliente puede tener varias Rutas
+        //[JsonIgnore]
+        //public virtual ICollection<Route> Rutas { get; set; }
+
+        // **************************************************************************************
+
     }
 }

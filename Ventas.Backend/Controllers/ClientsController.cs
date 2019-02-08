@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using Ventas.Backend.Helpers;
 using Ventas.Backend.Models;
 using Ventas.Common.Models;
 
@@ -19,7 +16,8 @@ namespace Ventas.Backend.Controllers
         // GET: Clients
         public async Task<ActionResult> Index()
         {
-            return View(await db.Clients.ToListAsync());
+            var clients = await db.Clients.OrderBy(c => c.ZoneId + c.Apellidos).ToListAsync();
+            return View(clients);
         }
 
         // GET: Clients/Details/5
@@ -40,6 +38,9 @@ namespace Ventas.Backend.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
+            ViewBag.ZoneId = new SelectList(CombosHelper.LeerZonas(), "ZoneId", "Descripcion");
+            ViewBag.PeriodicityId = new SelectList(CombosHelper.LeerPeriodicidad(), "PeriodicityId", "Descripcion");
+
             return View();
         }
 
@@ -48,7 +49,7 @@ namespace Ventas.Backend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ClientId,Nombre,Apellidos,EsActivo")] Client client)
+        public async Task<ActionResult> Create([Bind(Include = "ClientId,Nombre,Apellidos,PeriodicityId,ZoneId,EsActivo")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +57,9 @@ namespace Ventas.Backend.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.ZoneId = new SelectList(CombosHelper.LeerZonas(), "ZoneId", "Descripcion", client.ClientId);
+            ViewBag.PeriodicityId = new SelectList(CombosHelper.LeerPeriodicidad(), "PeriodicityId", "Descripcion", client.PeriodicityId);
 
             return View(client);
         }
@@ -72,6 +76,10 @@ namespace Ventas.Backend.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ZoneId = new SelectList(CombosHelper.LeerZonas(), "ZoneId", "Descripcion", client.ClientId);
+            ViewBag.PeriodicityId = new SelectList(CombosHelper.LeerPeriodicidad(), "PeriodicityId", "Descripcion", client.PeriodicityId);
+
             return View(client);
         }
 
@@ -80,7 +88,7 @@ namespace Ventas.Backend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ClientId,Nombre,Apellidos,EsActivo")] Client client)
+        public async Task<ActionResult> Edit([Bind(Include = "ClientId,Nombre,Apellidos,PeriodicityId,ZoneId,EsActivo")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -88,6 +96,10 @@ namespace Ventas.Backend.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.ZoneId = new SelectList(CombosHelper.LeerZonas(), "ZoneId", "Descripcion", client.ClientId);
+            ViewBag.PeriodicityId = new SelectList(CombosHelper.LeerPeriodicidad(), "PeriodicityId", "Descripcion", client.PeriodicityId);
+
             return View(client);
         }
 

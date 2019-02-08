@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Ventas.Controls"
+             xmlns:local="clr-namespace:Ventas.Convertir"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             x:Class="Ventas.Views.AddClientPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ErroresString x:Key="comprobarString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                BindingContext="{Binding AddClients}"
+                Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Text="Nombre: "
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        MaxLength="40"
+                        Placeholder="Introducir Nombre del cliente..."
+                        Text="{Binding Nombre}">
+                    </Entry>
+                    <Label 
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Text="Apellidos: "
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        MaxLength="140"
+                        Placeholder="Introducir Apellidos cliente..."
+                        Text="{Binding Apellidos}">
+                        <Entry.Triggers>
+                            <DataTrigger TargetType="Entry"
+                             Binding="{Binding Source={Binding Nombre},
+                                               Path=Text, 
+                                               Converter={StaticResource comprobarString}}"
+                             Value="False">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Entry.Triggers>
+                    </Entry>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Text="Zona: "
+                        VerticalOptions="Center">
+                    </Label>
+                    <control:BindablePicker
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        DisplayMemberPath="Descripcion" 
+                        HorizontalOptions="FillAndExpand" 
+                        ItemsSource="{Binding Zones}" 
+                        SelectedValue="{Binding Path=SelectedZoneId, Mode=TwoWay}" 
+                        SelectedValuePath="ZoneId" 
+                        Title="Seleccionar Zona..." 
+                        VerticalOptions="Center">
+                    </control:BindablePicker>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        Text="Periodicidad: "
+                        VerticalOptions="Center">
+                    </Label>
+                    <control:BindablePicker
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        DisplayMemberPath="Descripcion" 
+                        HorizontalOptions="FillAndExpand" 
+                        ItemsSource="{Binding Periodicities}" 
+                        SelectedValue="{Binding Path=SelectedPeriodicityId, Mode=TwoWay}" 
+                        SelectedValuePath="PeriodicityId" 
+                        Title="Seleccionar Periodicidad..." 
+                        VerticalOptions="Center">
+                    </control:BindablePicker>
+                </Grid>
+                <ActivityIndicator
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                </ActivityIndicator>
+                <Grid
+                    VerticalOptions="EndAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="1"                        
+                        Command="{Binding ComandoGuardarCliente}"
+                        Style="{StaticResource BotonAceptar}"
+                        Text="Guardar">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button"
+                             Binding="{Binding Source={Binding Apellidos},
+                                               Path=Text, 
+                                               Converter={StaticResource comprobarString}}"
+                             Value="False">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,14 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:infra="clr-namespace:Ventas.Infrastructure"
-             x:Class="Ventas.App">
+<Application 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:infra="clr-namespace:Ventas.Infrastructure"
+    x:Class="Ventas.App">
     <Application.Resources>
+        <!-- Application resource dictionary -->
         <ResourceDictionary>
-            
-            <!-- Locator -->
+            <!-- Instance Locator -->
             <infra:InstanceLocator x:Key="Locator"/>
+
+            <!-- Parametros -->
+            <x:String x:Key="UrlAPI">http://antonioleapi.somee.com</x:String>
             
+            <!-- Estilos -->
+            <!-- Elegir Tonos grises en color.adobe.com -->
+            <Color x:Key="PaginaListView">#F2F2F2</Color>
+            <Color x:Key="FontColorListView">#595959</Color>
+
+            <!-- Boton Aceptar -->
+            <Style x:Key="BotonAceptar" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#056021" />
+                <Setter Property="CornerRadius" Value="23" />
+                <Setter Property="TextColor" Value="#fff" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <!-- Boton Primary -->
+            <Style x:Key="BotonPrimary" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#1D0F87" />
+                <Setter Property="BorderRadius" Value="23" />
+                <Setter Property="TextColor" Value="#fff" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <!-- Boton Danger -->
+            <Style x:Key="BotonDanger" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#BA2529" />
+                <Setter Property="BorderRadius" Value="23" />
+                <Setter Property="TextColor" Value="#fff" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <!-- Boton Default -->
+            <Style x:Key="BotonDefault" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#B8B8B8" />
+                <Setter Property="BorderRadius" Value="23" />
+                <Setter Property="TextColor" Value="#333" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="IsEnabled" Value="False"/>
+            </Style>
+            <ControlTemplate x:Key="UnBoton">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="1"                        
+                        Command="{Binding ComandoGuardar}"
+                        Style="{StaticResource BotonAceptar}"
+                        Text="Guardar">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button"
+                             Binding="{Binding Source={x:TemplateBinding apellidos},
+                                               Path=Text, 
+                                               Converter={StaticResource comprobarString}}"
+                             Value="False">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
+            </ControlTemplate>
         </ResourceDictionary>
+
     </Application.Resources>
 </Application>
