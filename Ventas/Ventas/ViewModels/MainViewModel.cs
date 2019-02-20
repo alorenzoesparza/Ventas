@@ -9,7 +9,7 @@
     {
         public ClientsViewModel Clients { get; set; }
         public ProductsViewModel Products { get; set; }
-        public AddClientViewModel AddClients { get; set; }
+        public AddClientViewModel AddClient { get; set; }
 
         #region Constructor
         public MainViewModel()
@@ -28,7 +28,7 @@
 
         private async void GoToNuevoCliente()
         {
-            this.AddClients = new AddClientViewModel();
+            this.AddClient = new AddClientViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new AddClientPage());
         }
     }

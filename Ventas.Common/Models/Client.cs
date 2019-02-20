@@ -1,8 +1,5 @@
 ﻿namespace Ventas.Common.Models
 {
-    using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,6 +17,15 @@
         [MaxLength(140, ErrorMessage = "El campo{0} debe tener como máximo {1} caracteres")]
         [Display(Name = "Apellidos")]
         public string Apellidos { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        [Display(Name = "Código Postal")]
+        public int CPostal { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        [MaxLength(255, ErrorMessage = "El campo{0} debe tener como máximo {1} caracteres")]
+        [Display(Name = "Dirección")]
+        public string Direccion { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Periodicidad")]
